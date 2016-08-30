@@ -1,0 +1,7 @@
+<overrides>
+    <set module="ceylon.collection" version="1.2.3"/>
+    <set module="ceylon.json" version="1.2.3"/>
+    <replace module="ceylon.json" version="1.2.2">
+        <with module="ceylon.json" version="1.2.3"/>
+    </replace>
+</overrides> 

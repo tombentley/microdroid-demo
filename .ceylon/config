@@ -5,3 +5,4 @@ resource=resource
 
 [defaults]
 encoding=UTF-8
+overrides=overrides.xml
