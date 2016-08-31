@@ -12,7 +12,7 @@ import com.github.tombentley.javazone2016.demo.api {
     NumberService
 }
 
-"Client for the [[NumberService]] using ceylon.net"
+"Client for the [[NumberService]] using ceylon.http.client"
 shared class RemoteNumberService(String url="http://localhost:8081/numbers") 
         satisfies NumberService {
     value base = parseUri(url);

@@ -11,9 +11,9 @@ import com.github.tombentley.javazone2016.demo.api {
     perfect,
     perfect_continuous,
     past,
-    Subject,
     VerbService,
-    future
+    future,
+    Subject
 }
 import ceylon.regex {
     regex
@@ -21,6 +21,8 @@ import ceylon.regex {
 import ceylon.collection {
     ArrayList
 }
+
+
 
 "Using the given services, renders the templates"
 shared class Renderer(NumberService numbers,
@@ -98,13 +100,13 @@ shared class Renderer(NumberService numbers,
             result = adjectives.adverb();
         }
         case ("verb") {
-            result = verbs.verb(past, simple, subject);
+            result = verbs.randomVerb().apply(past, simple);
         }
         case ("gerund") {
-            result = verbs.gerund();
+            result = verbs.randomVerb().gerund;
         }
         case ("infinitive") {
-            result = verbs.infinitive();
+            result = verbs.randomVerb().infinitive;
         }
         case ("future-time") {
             result = pickFrom("tonight", "tomorrow", "next week", "next year");
@@ -143,7 +145,7 @@ shared class Renderer(NumberService numbers,
                 } else {
                     tense = present;
                 }
-                result = verbs.verb(tense, aspect, subject);
+                result = verbs.randomVerb().apply(tense, aspect);
             } else if (token.startsWith("num,")) {
                 assert(exists min = parseInteger(regex("min=([0-9+])").find(token)?.groups?.get(1) else "1"));
                 assert(exists max = parseInteger(regex("max=([0-9+])").find(token)?.groups?.get(1) else "13"));

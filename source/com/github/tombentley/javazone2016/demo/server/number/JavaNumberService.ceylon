@@ -6,7 +6,7 @@ import java.util {
 }
 
 "Implementation of [[NumberService]] which uses `java.util::Random`."
-class JavaNumberService(Integer num=8)
+class JavaNumberService()
         satisfies NumberService {
     
     value random = JRandom();

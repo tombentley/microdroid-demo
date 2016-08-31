@@ -12,6 +12,6 @@ class CeylonNumberService(Integer num=8)
     value random = DefaultRandom();
     
     shared actual Integer number(Integer min, Integer max) {
-        return min + random.nextInteger(max);
+        return min + random.nextInteger(max-min+1);
     }
 }

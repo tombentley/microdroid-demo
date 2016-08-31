@@ -31,6 +31,7 @@ case ("perfect") perfect
 case ("parfect_continuous") perfect_continuous
 else null;
 
+shared alias Subject => String;
 
 "Models a verb"
 serializable

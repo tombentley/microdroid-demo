@@ -10,16 +10,19 @@ import com.github.tombentley.javazone2016.demo.api {
     AdjectiveService
 }
 
-"Client for the [[AdjectiveService]] using ceylon.net"
+"Client for the [[AdjectiveService]] using ceylon.http.client"
 shared class RemoteAdjectiveService(
     adjectiveUrl=parseUri("http://localhost:8082/adjective/adjective"),
     adverbUrl = parseUri("http://localhost:8082/adjective/adverb"))
         satisfies AdjectiveService {
-    
+
+    "The URL for getting an adjective"
     shared Uri adjectiveUrl;
-    
+
+    "The URL for getting an adverb"
     shared Uri adverbUrl;
-    
+
+    "Make a request"
     String makeRequest(Uri uri) {
         value resp = Request(uri).execute();
         if (resp.status != 200) {

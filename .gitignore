@@ -1,3 +1,5 @@
 /.exploded/
 /classes/
 *~
+.idea/libraries/
+modules/

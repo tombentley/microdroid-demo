@@ -7,4 +7,5 @@ module com.github.tombentley.javazone2016.demo.client "1.0.0" {
     import ceylon.http.client "1.2.3";
     import ceylon.http.common "1.2.3";
     shared import ceylon.uri "1.2.3";
+    import com.github.tombentley.alabama "1.0.0";
 }

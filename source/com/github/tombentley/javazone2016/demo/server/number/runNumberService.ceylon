@@ -1,4 +1,4 @@
-import ceylon.http.common{get}
+import ceylon.http.common{...}
 import ceylon.http.server { ... }
 import ceylon.http.server.endpoints { ... }
 import ceylon.io {
@@ -6,6 +6,9 @@ import ceylon.io {
 }
 import com.github.tombentley.javazone2016.demo.api {
     NumberService
+}
+import ceylon.buffer.charset {
+    utf8
 }
 // An implementation we're going to expose over HTTP
 //NumberService numberService = JavaNumberService();
@@ -17,26 +20,24 @@ NumberService numberService = CeylonNumberService();
 Endpoint numberServiceEndpoint = Endpoint {
     acceptMethod={get}; 
     path = startsWith("/numbers/number");
-    service = void (request, response) {
-        value min = getParameter(request, "min", parseInteger);
-        if (is Integer min) {
+    void service(Request request, Response response) {
+        try {
+            value min = getParameter(request, "min", parseInteger);
             value max = getParameter(request, "max", parseInteger);
-            if (is Integer max) {
-                value result = numberService.number(min, max);
-                response.writeString(result.string);
-            } else {
-                // max is Anything(Response);
-                max(response);
-            }
-        } else {
-            // min is Anything(Response)
-            min(response);
+            value result = numberService.number(min, max);
+            response.status = 200;
+            response.addHeader(contentType("application/json", utf8));
+            response.writeString(result.string);
+        } catch (Exception e) {
+            response.status = 400;
+            response.addHeader(contentType("text/plain", utf8));
+            response.writeString(e.message);
         }
-    };
+    }
 };
 
 "The given parameter value, or a callable for generating an error response"
-Result|Anything(Response) getParameter<Result>(
+Result getParameter<Result>(
         "The request containing the parameter"
         Request request,
         "The name of the parameter to get"
@@ -48,24 +49,17 @@ Result|Anything(Response) getParameter<Result>(
         if (exists n = parse(s)) {
             return n;
         } else {
-            return (Response response) {
-                response.status = 400;//bad request
-                response.writeString("query parameter ``name`` was invalid");
-            };
+            throw Exception("query parameter ``name`` was invalid");
         }
     } else {
-        return (Response response) {
-            response.status = 400;//bad request
-            response.writeString("missing required query parameter ``name``");
-        };
+        throw Exception("missing required query parameter ``name``");
     }
 }
-
 
 "Starts an ceylon.http.server HTTP server on localhost:8081
  with the [[numberServiceEndpoint]].
 "
-shared void runNumberService() {
+shared void run() {
     Integer port = 8081;
     
     newServer{

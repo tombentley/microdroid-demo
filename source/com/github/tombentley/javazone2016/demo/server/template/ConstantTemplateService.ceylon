@@ -3,7 +3,7 @@ import com.github.tombentley.javazone2016.demo.api {
 }
 
 "Implementation of [[TemplateService]] which has some hard-coded templates"
-shared class ConstantTemplateService() 
+shared class ConstantRenderService()
         satisfies TemplateService {
     
     shared actual String[] templates(Integer num) => [
