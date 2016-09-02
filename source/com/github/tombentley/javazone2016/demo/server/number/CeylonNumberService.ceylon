@@ -6,7 +6,7 @@ import com.github.tombentley.javazone2016.demo.api {
 }
 
 "An implementation of [[NumberService]] that uses [[DefaultRandom]]."
-class CeylonNumberService(Integer num=8)
+class CeylonNumberService()
         satisfies NumberService {
     
     value random = DefaultRandom();

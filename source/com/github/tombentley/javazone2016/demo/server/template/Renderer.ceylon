@@ -1,5 +1,4 @@
 import com.github.tombentley.javazone2016.demo.api {
-    TemplateService,
     continuous,
     simple,
     Tense,
@@ -22,13 +21,10 @@ import ceylon.collection {
     ArrayList
 }
 
-
-
 "Using the given services, renders the templates"
 shared class Renderer(NumberService numbers,
     AdjectiveService adjectives,
-    VerbService verbs,
-    TemplateService templates) {
+    VerbService verbs) {
     
     // TODO hook up the subjects to wikidata so we know when a subject is a person
     // or a company etc.
@@ -185,9 +181,68 @@ shared class Renderer(NumberService numbers,
         return result.string;
     }
     
+    """Returns a sequence of templates, which will need to be filled in
+       using verbs and adjectives.
+       
+       For example
+       
+       > {num} reasons why {subject} sucks
+       
+       Parameters are enclosed by {}, and include
+       
+       * `{subject}` -- the subject of the sentence
+       * `{subject2}` -- another subject
+       * `{num}` -- a number
+       * `{adjective}` -- an adjective
+       * `{gerund}` -- a gerund (e.g. "working" in "How working...")
+       * `{verb}` -- a verb in simple present tense (e.g. "works" in "Fred works...")
+       * `{verb.TENSE.ASPECT}` --  a verb with the given `TENSE` and `ASPECT`.
+       `TENSE` may be one of:
+       * `present`
+       * `past`
+       * `future`
+       * `future-past`
+       * `*` (any random tense)
+       
+       `ASPECT` may be one of:
+       * `simple`
+       * `continuous`
+       * `perfect`
+       * `perfect-continuous`
+       * `*` (any random aspect)
+       * `future-time` -- a time in the future (e.g. "tomorrow")
+       * `past-time` -- a time in the future (e.g. "yeserday")
+       * `time-period` -- a time period (e.g. "day", "night", "week" etc)
+       """
+    String[] templates => [
+        "Why {subject} {verb.simple.present}",
+        "Why {subject} {verb.simple.present} {num} times a {time-period}",
+        "{num,min=3} reasons why {subject} {verb.simple.*}",
+        "{num,min=3} reasons why {subject} {verb.simple.future-past} as president",
+        "{num,min=3} reasons why {subject} {verb.simple.past} {adverb} {past-time}",
+        "{num,min=3} reasons why {subject} {verb.simple.future} {adverb} {future-time}",
+        "{num,min=3} {adjective} uses of/for {subject}",
+        "{num,min=2} {adjective} facts about {subject}",
+        "{num,min=2} reasons to be addicted to {subject}",
+        "{num,min=2} ways {subject} is good/bad for your {gerund}",
+        "The secret about {subject} that {subject2} doesn't want you to know about",// TODO depends on plurality of subject2
+        "Study shows {subject} can make you richer",
+        "{subject2} claims {subject} can make you sick",
+        "Court decides {subject} can help you {infinitive}",
+        "{num,min=2} ways investing in {subject} can make you a millionaire",
+        "How {gerund} with {subject} makes you better at {gerund}",
+        "How {gerund} with {subject} makes you fatter",
+        "How {gerund} with {subject} makes you better in bed",
+        "{num,min=2} things {subject2} has in common with {subject}",
+        "I spent {num} {time-period} {gerund} with {subject} and this is what happened...",
+        "Why {subject2} wants to stop {subject} from {gerund}",
+        "{num} celebrities who {adverb} use {subject} to help them {infinitive}",
+        "{subject2}: My {num} {time-period} love affair with {subject}"
+    ];
+    
     "Return a bunch of sentences for the given subject"
     shared String[] sentences(Subject subject) {
-        String[] templates = this.templates.templates();
+        String[] templates = this.templates;
         value result = ArrayList<String>(templates.size);
         for (template in templates) {
             // s is a template like "why {subject} {verb.simple.present}"

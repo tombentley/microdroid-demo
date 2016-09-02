@@ -22,7 +22,9 @@ import io.vertx.ceylon.web {
 }
 
 class HttpVerbService() {
-    VerbService vs = ConstantVerbService(RemoteNumberService());
+    VerbService vs = ConstantVerbService {
+        numberService = RemoteNumberService();
+    };
     value vertx = newvertx.vertx();
     value server = vertx.createHttpServer();
     

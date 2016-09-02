@@ -1,5 +1,6 @@
-"Services exposing the [[module com.github.tombentley.javazone2016.demo.api]]
- over HTTP using various things..."
+"Provides a couple of implementations of 
+ [[com.github.tombentley.javazone2016.demo.api::NumberService]]
+ and can expose them over HTTP."
 native("jvm") module com.github.tombentley.javazone2016.demo.server.number "1.0.0" {
     
     // a couple of random number implementations

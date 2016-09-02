@@ -1,37 +1,8 @@
-"Enumerates tenses of verbs"
-shared abstract class Tense() 
-        of present|past|future|future_past {}
-
-shared object present extends Tense() {}
-shared object past extends Tense() {}
-shared object future extends Tense() {}
-shared object future_past extends Tense() {}
-
-shared Tense? parseTense(String tense) 
-        => switch (tense) 
-case ("present") present 
-case ("past") past
-case ("future") future
-case ("future_past") future_past
-else null;
-
-"Enumerates aspects of verbs"
-shared abstract class Aspect() 
-        of simple|continuous|perfect|perfect_continuous {}
-shared object simple extends Aspect() {}
-shared object continuous extends Aspect() {}
-shared object perfect extends Aspect() {}
-shared object perfect_continuous extends Aspect() {}
-
-shared Aspect? parseAspect(String aspect) 
-        => switch (aspect) 
-case ("simple") simple 
-case ("continuous") continuous
-case ("perfect") perfect
-case ("parfect_continuous") perfect_continuous
-else null;
-
-shared alias Subject => String;
+"Generates random verbs."
+shared interface VerbService {
+    "A random verb."
+    shared formal Verb randomVerb();
+}
 
 "Models a verb"
 serializable
@@ -114,9 +85,50 @@ shared class Verb(infinitive,
     }
 }
 
+"Enumerates *tenses* of verbs"
+shared abstract class Tense() 
+        of present|past|future|future_past {}
+"The present tense"
+shared object present extends Tense() {}
+"The past tense"
+shared object past extends Tense() {}
+"The future tense"
+shared object future extends Tense() {}
+"The future past tense (e.g. would go, would have gone)"
+shared object future_past extends Tense() {}
 
-"Generates random verbs"
-shared interface VerbService {
-    "A random verb with the given tense and aspect"
-    shared formal Verb randomVerb();
-}
+/*
+"Parse the String represention of a tense, returning the Tense, or 
+ null if the given tense could not be parsed."
+shared Tense? parseTense(String tense) 
+        => switch (tense) 
+    case ("present") present 
+    case ("past") past
+    case ("future") future
+    case ("future_past") future_past
+    else null;
+*/
+"Enumerates *aspects* of verbs."
+shared abstract class Aspect() 
+        of simple|continuous|perfect|perfect_continuous {}
+"The simple apsect (e.g. goes)."
+shared object simple extends Aspect() {}
+"The continuous aspect (am/is/are going)."
+shared object continuous extends Aspect() {}
+"The perfect aspect (e.g. have/has gone)."
+shared object perfect extends Aspect() {}
+"The perfect continuous aspect (e.g. have/has been going)."
+shared object perfect_continuous extends Aspect() {}
+
+/*
+"Parses the given string representation of an aspect, returns the aspect, 
+ or null if the given string representation could not be parsed."
+shared Aspect? parseAspect(String aspect) 
+        => switch (aspect) 
+    case ("simple") simple 
+    case ("continuous") continuous
+    case ("perfect") perfect
+    case ("parfect_continuous") perfect_continuous
+    else null;
+*/
+shared alias Subject => String;
