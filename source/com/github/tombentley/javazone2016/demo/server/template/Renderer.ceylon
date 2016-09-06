@@ -112,7 +112,7 @@ shared class Renderer(NumberService numbers,
         }
         case ("time-period") {
             // TODO handle plurals (1 day, 2 days)
-            result = pickFrom("hour", "day", "night", "year");
+            result = pickFrom("hours", "days", "nights", "years");
         }
         case ("subject2") {
             result = pickFrom(
@@ -216,7 +216,7 @@ shared class Renderer(NumberService numbers,
        """
     String[] templates => [
         "Why {subject} {verb.simple.present}",
-        "Why {subject} {verb.simple.present} {num} times a {time-period}",
+        "Why {subject} {verb.simple.present} {num,min=2} times a {time-period}",
         "{num,min=3} reasons why {subject} {verb.simple.*}",
         "{num,min=3} reasons why {subject} {verb.simple.future-past} as president",
         "{num,min=3} reasons why {subject} {verb.simple.past} {adverb} {past-time}",
@@ -234,10 +234,10 @@ shared class Renderer(NumberService numbers,
         "How {gerund} with {subject} makes you fatter",
         "How {gerund} with {subject} makes you better in bed",
         "{num,min=2} things {subject2} has in common with {subject}",
-        "I spent {num} {time-period} {gerund} with {subject} and this is what happened...",
+        "I spent {num,min=2} {time-period} {gerund} with {subject} and this is what happened...",
         "Why {subject2} wants to stop {subject} from {gerund}",
         "{num} celebrities who {adverb} use {subject} to help them {infinitive}",
-        "{subject2}: My {num} {time-period} love affair with {subject}"
+        "{subject2}: My {num,min=2} {time-period} love affair with {subject}"
     ];
     
     "Return a bunch of sentences for the given subject"

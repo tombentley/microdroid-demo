@@ -97,17 +97,6 @@ shared object future extends Tense() {}
 "The future past tense (e.g. would go, would have gone)"
 shared object future_past extends Tense() {}
 
-/*
-"Parse the String represention of a tense, returning the Tense, or 
- null if the given tense could not be parsed."
-shared Tense? parseTense(String tense) 
-        => switch (tense) 
-    case ("present") present 
-    case ("past") past
-    case ("future") future
-    case ("future_past") future_past
-    else null;
-*/
 "Enumerates *aspects* of verbs."
 shared abstract class Aspect() 
         of simple|continuous|perfect|perfect_continuous {}
@@ -120,15 +109,4 @@ shared object perfect extends Aspect() {}
 "The perfect continuous aspect (e.g. have/has been going)."
 shared object perfect_continuous extends Aspect() {}
 
-/*
-"Parses the given string representation of an aspect, returns the aspect, 
- or null if the given string representation could not be parsed."
-shared Aspect? parseAspect(String aspect) 
-        => switch (aspect) 
-    case ("simple") simple 
-    case ("continuous") continuous
-    case ("perfect") perfect
-    case ("parfect_continuous") perfect_continuous
-    else null;
-*/
 shared alias Subject => String;

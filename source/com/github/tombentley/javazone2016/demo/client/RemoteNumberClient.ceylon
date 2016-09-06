@@ -1,24 +1,22 @@
-import ceylon.uri {
-    Parameter,
-    PathSegment,
-    Path,
-    parseUri=parse,
-    Query
-}
 import ceylon.http.client {
     Request
 }
+import ceylon.uri {
+    Parameter,
+    parseUri=parse,
+    Query
+}
+
 import com.github.tombentley.javazone2016.demo.api {
     NumberService
 }
 
 "Client for the [[NumberService]] using ceylon.http.client"
-shared class RemoteNumberService(String url="http://localhost:8081/numbers") 
+shared class RemoteNumberService(String url="http://localhost:8081/numbers/number") 
         satisfies NumberService {
     value base = parseUri(url);
     shared actual Integer number(Integer min, Integer max) {
-        // TODO add Uri.appendPath()
-        value url = base.withPath(Path(true, *base.path.segments.withTrailing(PathSegment("number")))).withQuery(Query(
+        value url = base.withQuery(Query(
             Parameter("min", min.string), 
             Parameter("max", max.string)));
         value resp = Request(url).execute();
