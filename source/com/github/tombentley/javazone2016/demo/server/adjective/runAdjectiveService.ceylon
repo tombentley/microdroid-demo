@@ -3,7 +3,7 @@ import com.github.tombentley.javazone2016.demo.client {
 }
 
 import io.vertx.ceylon.core {
-    newvertx=vertx,
+    vertxFactory=vertx,
     Future
 }
 import io.vertx.ceylon.core.http {
@@ -21,7 +21,7 @@ shared void run() {
 
     value port = 8082;
     value address = "127.0.0.1";
-    value vertx = newvertx.vertx();
+    value vertx = vertxFactory.vertx();
     vertx.createHttpServer().requestHandler{
         void handler(HttpServerRequest request) {
             value resp = request.response();

@@ -3,7 +3,7 @@ import ceylon.json {
 }
 import io.vertx.ceylon.web {
     RoutingContext,
-    router_=router
+    routerFactory=router
 }
 import com.github.tombentley.alabama {
     serialize
@@ -12,7 +12,7 @@ import com.github.tombentley.javazone2016.demo.client {
     RemoteNumberService
 }
 import io.vertx.ceylon.core {
-    newvertx=vertx
+    vertxFactory=vertx
 }
 import io.vertx.ceylon.core.http {
     get,
@@ -28,9 +28,9 @@ shared void run() {
     };
     value address = "localhost";
     value port = 8083;
-    value vertx = newvertx.vertx();
+    value vertx = vertxFactory.vertx();
     value server = vertx.createHttpServer();
-    value router = router_.router(vertx);
+    value router = routerFactory.router(vertx);
     router.route("/verb").method(get).handler((RoutingContext routingContext) {
         
         // This handler will be called for every request

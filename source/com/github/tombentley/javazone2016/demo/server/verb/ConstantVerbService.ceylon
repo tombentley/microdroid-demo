@@ -3,7 +3,8 @@ import com.github.tombentley.javazone2016.demo.api {
 }
 
 "Implementation of [[VerbService]] which has some hard-coded verbs"
-class ConstantVerbService(NumberService numberService) satisfies VerbService {
+class ConstantVerbService(NumberService numberService) 
+        satisfies VerbService {
     value verbs = [
         Verb("suck"), 
         Verb("rock"), 

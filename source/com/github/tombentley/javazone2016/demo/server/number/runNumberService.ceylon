@@ -56,14 +56,7 @@ Result getParameter<Result>(
         String name,
         "A callable to parse the result" 
         Result?(String) parse) {
-    
-    if (exists s = request.queryParameter(name)) {
-        if (exists n = parse(s)) {
-            return n;
-        } else {
-            throw Exception("query parameter ``name`` was invalid");
-        }
-    } else {
-        throw Exception("missing required query parameter ``name``");
-    }
+    assert(exists s = request.queryParameter(name));
+    assert(exists n = parse(s));
+    return n;
 }
