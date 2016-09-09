@@ -54,7 +54,8 @@ Result getParameter<Result>(
         Request request,
         "The name of the parameter to get"
         String name,
-        "A callable to parse the result" 
+        "A callable to parse the result, 
+         returns null iff the given string could not be parsed" 
         Result?(String) parse) {
     assert(exists s = request.queryParameter(name));
     assert(exists n = parse(s));
