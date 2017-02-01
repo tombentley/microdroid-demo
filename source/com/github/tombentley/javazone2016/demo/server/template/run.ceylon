@@ -11,7 +11,7 @@ import ceylon.http.server {
 import ceylon.json {
     JsonArray
 }
-import com.github.bjansen.gyokuro.core {
+import net.gyokuro.core {
     Application,
     controller,
     route,
