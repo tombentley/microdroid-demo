@@ -1,0 +1,1 @@
+Bundle-Activator: com.github.tombentley.javazone2016.demo.server.number.Activator
