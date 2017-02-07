@@ -2,7 +2,8 @@ import ceylon.buffer.charset {
     utf8
 }
 import ceylon.http.common {
-    contentType
+    contentType,
+    Header
 }
 import ceylon.http.server {
     Request,
@@ -45,6 +46,7 @@ controller class RenderController() {
     shared route("/:subject") void titles(Request req, Response resp, String subject) {
         try {
             resp.addHeader(contentType("application/json", utf8));
+            resp.addHeader(Header("Access-Control-Allow-Origin", "*"));
             resp.writeString(JsonArray {
                 values = renderer.sentences(subject);
             }.pretty);
