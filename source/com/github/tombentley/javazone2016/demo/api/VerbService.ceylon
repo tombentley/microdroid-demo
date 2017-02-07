@@ -83,6 +83,8 @@ shared class Verb(infinitive,
             case (future_past) perfectContinuousFuturePast;
         }
     }
+    
+    string => "``infinitive``/``gerund``/``simplePast``";
 }
 
 "Enumerates *tenses* of verbs"
