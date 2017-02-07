@@ -28,7 +28,7 @@ import com.github.tombentley.javazone2016.demo.client {
  Application listening on localhost:8084"
 shared void run() {
     Application{
-        address="127.0.0.1";
+        //address="127.0.0.1";
         port=8084;
         controllers = bind(`package`, "/titles");
     }.run();
