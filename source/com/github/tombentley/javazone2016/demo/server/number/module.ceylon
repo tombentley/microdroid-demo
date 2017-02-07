@@ -12,4 +12,8 @@ native("jvm") module com.github.tombentley.javazone2016.demo.server.number "1.0.
     // we'll expose the number service using ceylon.http.server
     import ceylon.http.server "1.3.1";
     import ceylon.http.common "1.3.1";
+
+    // For OSGi
+    //shared import com.redhat.ceylon.dist "1.3.1";
+    //import org.osgi.core "4.3.1";
 }

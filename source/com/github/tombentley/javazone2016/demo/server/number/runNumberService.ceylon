@@ -10,6 +10,12 @@ import com.github.tombentley.javazone2016.demo.api {
 import ceylon.buffer.charset {
     utf8
 }
+//import org.osgi.framework {
+//    BundleContext
+//}
+//import com.redhat.ceylon.dist.osgi {
+//    DefaultActivator=Activator
+//}
 
 
 "Starts an ceylon.http.server HTTP server on localhost:8081
@@ -20,6 +26,23 @@ shared void run() {
         numberServiceEndpoint
     }.start(SocketAddress("localhost", 8081));
 }
+
+//shared class Activator() extends DefaultActivator() {
+//    value server = newServer{
+//        numberServiceEndpoint
+//    };
+//    shared actual void start(BundleContext context) {
+//        super.start(context);
+//        print("Starting server");
+//        server.startInBackground(SocketAddress("localhost",8081));
+//        print("Started server");
+//    }
+//    shared actual void stop(BundleContext context) {
+//        server.stop();
+//        super.stop(context);
+//    }
+//}
+
 
 "An endpoint exposing the [[numberService]].
  on the path `/numbers/number?min={min}&max={max}`.
